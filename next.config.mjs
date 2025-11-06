@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
 
-  // 🧠 This line tells Next.js to ignore ESLint during builds
+  // 🚫 Skip ESLint entirely during Vercel builds
   eslint: {
     ignoreDuringBuilds: true,
   },
