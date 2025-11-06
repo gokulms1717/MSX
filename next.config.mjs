@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
 
+  // 🧠 Tell Next.js to skip ESLint & TypeScript checks completely
   eslint: {
     ignoreDuringBuilds: true,
   },
-
   typescript: {
-    ignoreBuildErrors: true, // 🚀 ignore TypeScript + lint errors during build
+    ignoreBuildErrors: true,
   },
 
   images: {
@@ -17,6 +17,16 @@ const nextConfig = {
         hostname: 'avatars.githubusercontent.com',
       },
     ],
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/editor',
+        destination: '/builder',
+        permanent: true,
+      },
+    ];
   },
 };
 
