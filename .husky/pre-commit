@@ -1,3 +1,0 @@
-
-npx pretty-quick --staged
-npm run lint
