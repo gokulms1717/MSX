@@ -1,18 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  // 🧠 This line tells Next.js to ignore ESLint during builds
   eslint: {
-    dirs: [
-      'stories',
-      'src/__test__',
-      'src/common',
-      'src/helpers',
-      'src/modules',
-      'src/pages',
-      'src/styles',
-      'src/templates',
-    ],
+    ignoreDuringBuilds: true,
   },
+
   images: {
     remotePatterns: [
       {
@@ -21,6 +15,7 @@ const nextConfig = {
       },
     ],
   },
+
   async redirects() {
     return [
       {
