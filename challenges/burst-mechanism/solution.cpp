@@ -138,29 +138,27 @@ int main(){
 
     int cr = R;
     int cc = N;
-    int dr = -1, dc = 0;
+    int dr = -1, dc = 0;  // Start moving straight up
 
     if(cc < 0) cc = 0;
     if(cc >= C) cc = C-1;
 
-    int maxIter = R * C * 10; // Prevent infinite loops
-    int iter = 0;
+    int iterSinceHit = 0;
+    int maxIterWithoutHit = 2 * (R + C); // Ball can traverse grid twice
 
-    while(burstCount < K && remainingCells > 0 && iter < maxIter){
-        iter++;
+    while(burstCount < K && remainingCells > 0 && iterSinceHit < maxIterWithoutHit){
+        iterSinceHit++;
 
         int nr = cr + dr;
         int nc = cc + dc;
 
+        // Handle horizontal boundary
         if(nc < 0 || nc >= C){
             dc = -dc;
             nc = cc + dc;
         }
-        if(nr < 0){
-            dr = -dr;
-            nr = cr + dr;
-        }
-        if(nr >= R){
+        // Handle vertical boundary (both top and bottom)
+        if(nr < 0 || nr >= R){
             dr = -dr;
             nr = cr + dr;
         }
@@ -169,6 +167,7 @@ int main(){
         cr = nr;
         cc = nc;
 
+        // Check cells in direction of movement from previous position
         int vr = pr + dr, vc = pc;
         int hr = pr, hc = pc + dc;
         int drc = pr + dr, dcc = pc + dc;
@@ -214,7 +213,7 @@ int main(){
         if(hit){
             burstCount++;
             drop_and_score();
-            iter = 0; // Reset iteration counter after a hit
+            iterSinceHit = 0; // Reset counter after a hit
         }
     }
 
